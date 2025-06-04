@@ -20,7 +20,7 @@ def escreverDados(nome, pontos):
 
 tamanho = (800, 600)
 tela = pygame.display.set_mode(tamanho)
-pygame.display.set_caption("Iron Man do Marcão")
+pygame.display.set_caption("Iron Man: Projeto Final")
 relogio = pygame.time.Clock()
 
 # Cores
