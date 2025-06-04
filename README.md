@@ -7,7 +7,6 @@
 - RA: 1136806
 
 ## Descrição do Jogo
-
 Neste jogo, o jogador controla um herói em um cenário de batalha onde deve desviar de mísseis que caem do céu.  
 Cada míssil evitado aumenta a pontuação. O jogo termina quando ocorre uma colisão.  
 O objetivo é testar os reflexos do jogador enquanto a dificuldade aumenta gradualmente.
