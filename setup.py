@@ -1,15 +1,20 @@
 # pip install cx_freeze
 import cx_Freeze
-executaveis = [ 
-               cx_Freeze.Executable(script="main.py", icon="assets/icone.ico") ]
+executaveis = [
+    cx_Freeze.Executable(script="main.py", icon="Recursos/icone.ico")
+]
+
 cx_Freeze.setup(
-    name = "Iron Man",
+    name="Iron Man",
+    version="1.0",
+    description="Projeto final - Felipe Luza",
     options={
-        "build_exe":{
-            "packages":["pygame"],
-            "include_files":["assets"]
+        "build_exe": {
+            "packages": ["pygame"],
+            "include_files": ["Recursos"]
         }
-    }, executables = executaveis
+    },
+    executables=executaveis
 )
 
 # python setup.py build
