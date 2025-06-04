@@ -7,9 +7,12 @@
 - RA: 1136806
 
 ## Descrição do Jogo
-Neste jogo, o jogador controla um herói em um cenário de batalha onde deve desviar de mísseis que caem do céu.  
-Cada míssil evitado aumenta a pontuação. O jogo termina quando ocorre uma colisão.  
-O objetivo é testar os reflexos do jogador enquanto a dificuldade aumenta gradualmente.
+Neste jogo, o jogador assume o papel de um herói em uma zona de combate, onde mísseis caem constantemente do céu.  
+O objetivo é desviar dos ataques, sobreviver o maior tempo possível e acumular pontos a cada míssil evitado.
+
+Com o avanço da partida, a dificuldade aumenta, exigindo reflexos rápidos e controle preciso.  
+A experiência combina ação, tensão e um desafio crescente, ideal para testar os limites do jogador.
+
 
 ## Tecnologias Utilizadas
 - Python 3.13 (compatível também com Python 3.11)
