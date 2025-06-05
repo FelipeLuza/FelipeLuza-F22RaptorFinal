@@ -1,3 +1,4 @@
+from Recursos.funcoes2 import mensagem_inicio
 import pygame
 import random
 import json
@@ -18,7 +19,7 @@ def escreverDados(nome, pontos):
     with open("base.atitus", "w") as f:
         json.dump(dados, f)
 
-tamanho = (800, 600)
+tamanho = (1000, 700)
 tela = pygame.display.set_mode(tamanho)
 pygame.display.set_caption("Iron Man: Projeto Final")
 relogio = pygame.time.Clock()
@@ -29,8 +30,9 @@ preto = (0, 0, 0)
 
 # Carregar imagens e sons
 iron = pygame.image.load("Recursos/iron.png")
-fundoStart = pygame.image.load("Recursos/fundoStart.jpg")
-fundoJogo = pygame.image.load("Recursos/fundoJogo.png")
+fundoJogo = pygame.transform.scale(
+    pygame.image.load("Recursos/fundoBatalha.jpg"), (1000, 700)
+)
 fundoDead = pygame.image.load("Recursos/fundoDead.png")
 missel = pygame.image.load("Recursos/missile.png")
 missileSound = pygame.mixer.Sound("Recursos/missile.wav")
@@ -66,6 +68,23 @@ def digitar_nome():
 # Função principal do jogo
 def jogar():
     nome = digitar_nome()
+    mensagem = mensagem_inicio(nome)
+    tela.fill(preto)
+    texto_msg = fonteMenu.render(mensagem, True, branco)
+    tela.blit(texto_msg, (100, 300))
+    pygame.display.update()
+    pygame.time.wait(2000)  # espera 2 segundos
+
+    
+
+    for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                quit()
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_RETURN:
+                    esperando = False
+
+
 
     posicaoX = 400
     posicaoY = 300
@@ -149,7 +168,7 @@ def jogar():
 # Menu inicial
 def menu():
     while True:
-        tela.blit(fundoStart, (0, 0))
+        tela.blit(fundoJogo, (0, 0))
         titulo = fonteMorte.render("Iron Man do Marcão", True, branco)
         tela.blit(titulo, (200, 200))
         start = fonteMenu.render("Pressione ENTER para Jogar", True, branco)
