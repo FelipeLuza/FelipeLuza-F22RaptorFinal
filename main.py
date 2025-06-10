@@ -272,7 +272,6 @@ def jogar():
                 posicoesMisseis.remove(missil_pos)
                 pontos += 1
 
-        # ✅ Verificação da vitória (fora do for)
         if pontos >= 50:
             escreverDados(nome, pontos)
             pygame.mixer.stop()
