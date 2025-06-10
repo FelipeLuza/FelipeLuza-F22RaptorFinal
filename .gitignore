@@ -1,0 +1,6 @@
+# Ignorar pastas geradas por build
+build/
+dist/
+__pycache__/
+*.spec
+*.log

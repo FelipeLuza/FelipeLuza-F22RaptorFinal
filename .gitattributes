@@ -1,0 +1,6 @@
+# Ignora arquivos HTML na detecção de linguagem
+*.html linguist-detectable=false
+
+# Marca a pasta build como "vendored" (ignorada na linguagem principal)
+build/* linguist-vendored
+dist/* linguist-vendored
