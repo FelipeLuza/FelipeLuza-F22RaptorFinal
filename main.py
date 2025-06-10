@@ -5,10 +5,6 @@ import json
 
 pygame.init()
 
-iron_img = pygame.image.load("Recursos/iron.png")
-iron_x = -100
-iron_y = 445
-iron_vel = 0.9
 
 # Tela e configurações iniciais
 tamanho = (1000, 700)
