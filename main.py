@@ -102,21 +102,23 @@ def tela_boas_vindas(nome):
     esperando_tecla = True
     som_comunicacao.stop()
 
-    pygame.mixer.music.pause()  
+    pygame.mixer.music.pause()
     falar_frase_inicial(nome)
-    pygame.mixer.music.unpause()  
+    pygame.mixer.music.unpause()
 
     while esperando_tecla:
         tela.fill(preto)
+
         titulo = fonteMorte.render(f"Bem-vindo, {nome}!", True, branco)
         explicacao1 = fonteMenu.render("Você controla o caça abaixo.", True, branco)
         explicacao2 = fonteMenu.render("Desvie dos mísseis do inimigo e marque pontos!", True, branco)
         tecla_msg = fonteMenu.render("Pressione ESPAÇO ou TAB e fale 'jogar' para começar", True, branco)
 
-        tela.blit(titulo, (300, 150))
-        tela.blit(explicacao1, (280, 220))
-        tela.blit(explicacao2, (200, 260))
-        tela.blit(tecla_msg, (250, 400))
+        tela.blit(titulo, ((1000 - titulo.get_width()) // 2, 150))
+        tela.blit(explicacao1, ((1000 - explicacao1.get_width()) // 2, 220))
+        tela.blit(explicacao2, ((1000 - explicacao2.get_width()) // 2, 260))
+        tela.blit(tecla_msg, ((1000 - tecla_msg.get_width()) // 2, 400))
+
         pygame.display.update()
 
         for evento in pygame.event.get():
@@ -129,12 +131,12 @@ def tela_boas_vindas(nome):
                 elif evento.key == pygame.K_TAB:
                     som_comunicacao.stop()
                     print("Ouvindo... fale 'jogar'")
-                    pygame.mixer.music.pause()  
+                    pygame.mixer.music.pause()
                     if ouvir_comando():
                         print("Comando de voz aceito!")
                         esperando_tecla = False
-                    pygame.mixer.music.unpause()  
-
+                    pygame.mixer.music.unpause()
+ 
 def jogar():
     pontos = 0
     nome = digitar_nome()
