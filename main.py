@@ -27,6 +27,8 @@ missileSound = pygame.mixer.Sound("Recursos/missil.wav")
 explosaoSound = pygame.mixer.Sound("Recursos/explosao.wav")
 som_comunicacao = pygame.mixer.Sound("Recursos/comunicacao.wav")
 iron = pygame.image.load("Recursos/iron.png")
+musica_batalha = pygame.mixer.music.load("Recursos/music_batalha.mp3")
+pygame.mixer.music.set_volume(0.4)
 
 # Fontes
 fonteMenu = pygame.font.SysFont("comicsans", 24)
@@ -95,10 +97,14 @@ def digitar_nome():
                     if len(nome) < 12:
                         nome += evento.unicode
 
+
 def tela_boas_vindas(nome):
     esperando_tecla = True
-    som_comunicacao.stop()  
+    som_comunicacao.stop()
+
+    pygame.mixer.music.pause()  
     falar_frase_inicial(nome)
+    pygame.mixer.music.unpause()  
 
     while esperando_tecla:
         tela.fill(preto)
@@ -123,16 +129,18 @@ def tela_boas_vindas(nome):
                 elif evento.key == pygame.K_TAB:
                     som_comunicacao.stop()
                     print("Ouvindo... fale 'jogar'")
+                    pygame.mixer.music.pause()  
                     if ouvir_comando():
                         print("Comando de voz aceito!")
-                        som_comunicacao.stop()
                         esperando_tecla = False
+                    pygame.mixer.music.unpause()  
 
 def jogar():
     pontos = 0
     nome = digitar_nome()
     tela_boas_vindas(nome)
-
+    pygame.mixer.music.play(-1)  # Inicia a música de fundo
+    
     posicaoX_caca = (1000 - caca.get_width()) // 2
     posicaoY_caca = 700 - caca.get_height() - 10
     movimentoX_caca = 0
