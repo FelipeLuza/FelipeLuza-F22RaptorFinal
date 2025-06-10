@@ -1,21 +1,21 @@
-# pip install cx_freeze
-import cx_Freeze
-executaveis = [
-    cx_Freeze.Executable(script="main.py", icon="Recursos/icone.ico")
+from cx_Freeze import setup, Executable
+
+build_options = {
+    "packages": ["pygame", "pyttsx3", "speech_recognition", "pyaudio"],
+    "include_files": [("Recursos", "Recursos")]  
+}
+
+executables = [
+    Executable(
+        script="main.py",  
+        base=None
+    )
 ]
 
-cx_Freeze.setup(
-    name="Iron Man",
+setup(
+    name="F-22 Raptor: Zona de Combate",
     version="1.0",
     description="Projeto final - Felipe Luza",
-    options={
-        "build_exe": {
-            "packages": ["pygame"],
-            "include_files": ["Recursos"]
-        }
-    },
-    executables=executaveis
+    options={"build_exe": build_options},
+    executables=executables
 )
-
-# python setup.py build
-# python setup.py bdist_msi
