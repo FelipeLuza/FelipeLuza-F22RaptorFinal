@@ -23,6 +23,7 @@ json (armazenamento de dados)
 datetime (registro de data/hora)
 cx_Freeze (empacotamento para executável)
 Git (controle de versão)
+
 Funcionalidades
 
 Tela de menu com som de comunicação
