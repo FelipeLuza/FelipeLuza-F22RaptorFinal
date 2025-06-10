@@ -1,6 +1,8 @@
-# Ignora arquivos HTML na detecção de linguagem
+# Ignorar HTML, CSS e JS na análise do GitHub
 *.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
 
-# Marca a pasta build como "vendored" (ignorada na linguagem principal)
+# Ignorar pastas de build
 build/* linguist-vendored
 dist/* linguist-vendored
