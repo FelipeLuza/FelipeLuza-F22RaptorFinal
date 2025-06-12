@@ -23,7 +23,6 @@ fundoStart = pygame.image.load("Recursos/fundoStart.jpg")
 fundoJogo = pygame.transform.scale(pygame.image.load("Recursos/fundoBatalha.jpeg"), tamanho)
 missil = pygame.image.load("Recursos/missil.png")
 img_explosao = pygame.image.load("Recursos/explosao.png").convert_alpha()
-missileSound = pygame.mixer.Sound("Recursos/missil.wav")
 explosaoSound = pygame.mixer.Sound("Recursos/explosao.wav")
 som_comunicacao = pygame.mixer.Sound("Recursos/comunicacao.wav")
 iron = pygame.image.load("Recursos/iron.png")
@@ -57,6 +56,7 @@ def escreverDados(nome, pontos):
     with open("log.dat", "w") as f:
         json.dump(dados, f, indent=4, ensure_ascii=False)
 
+
 def lerUltimosRegistros(n=5):
     try:
         with open("log.dat", "r") as f:
@@ -72,7 +72,6 @@ def lerUltimosRegistros(n=5):
 
     return registros_validos[-n:]
 
-
 def digitar_nome():
     nome = ""
     digitando = True
@@ -80,10 +79,13 @@ def digitar_nome():
     while digitando:
         tela.fill(preto)
         texto = fonteMenu.render("Digite seu nome e pressione Enter:", True, branco)
-        tela.blit(texto, (200, 200))
         nome_render = fonteMenu.render(nome, True, branco)
-        tela.blit(nome_render, (200, 240))
+        texto_x = (1000 - texto.get_width()) // 2
+        nome_x = (1000 - nome_render.get_width()) // 2
+        tela.blit(texto, (texto_x, 300))
+        tela.blit(nome_render, (nome_x, 340))
         pygame.display.update()
+
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -141,7 +143,7 @@ def jogar():
     pontos = 0
     nome = digitar_nome()
     tela_boas_vindas(nome)
-    pygame.mixer.music.play(-1)  # Inicia a música de fundo
+    pygame.mixer.music.play(-1) 
     
     posicaoX_caca = (1000 - caca.get_width()) // 2
     posicaoY_caca = 700 - caca.get_height() - 10
@@ -158,7 +160,6 @@ def jogar():
     ultimo_aumento = pygame.time.get_ticks()
 
     posicoesMisseis = []
-    canais_misseis = []
     larguraCaca = caca.get_width()
     alturaCaca = caca.get_height()
     larguraMissil = missil.get_width()
@@ -229,16 +230,9 @@ def jogar():
             missilX = posicaoXInimigo + (cacaInimigo.get_width() // 2) - (missil.get_width() // 2)
             missilY = posicaoYInimigo + cacaInimigo.get_height()
             posicoesMisseis.append([missilX, missilY])
-            novo_canal = pygame.mixer.find_channel()
-            if novo_canal:
-                novo_canal.set_volume(1.0)
-                novo_canal.play(missileSound)
-                canais_misseis.append(novo_canal)
             tempo_disparo = tempo_atual
             if tempo_entre_disparos > 300:
                 tempo_entre_disparos -= 20
-
-        canais_misseis = [c for c in canais_misseis if c.get_busy()]
 
         if tempo_atual - ultimo_aumento > 5000 and velocidadeMissel < velocidade_maxima:
             velocidadeMissel += 1
@@ -282,25 +276,32 @@ def jogar():
                 posicoesMisseis.remove(missil_pos)
                 pontos += 1
 
-        if pontos >= 50:
-            escreverDados(nome, pontos)
-            pygame.mixer.stop()
-            tela.blit(fundoJogo, (0, 0))
-            texto_vitoria = fonteMorte.render(f"Missão cumprida, piloto! Pontuação final: {pontos}", True, branco)
-            tela.blit(texto_vitoria, (180, 200))
-            texto_instrucao = fonteMenu.render("Você salvou o mundo! Pressione qualquer tecla para encerrar a missão.", True, branco)
-            tela.blit(texto_instrucao, (120, 300))
-            pygame.display.update()
-            pygame.event.clear()
-            esperando_saida = True
-            while esperando_saida:
-                for evento in pygame.event.get():
-                    if evento.type == pygame.QUIT:
-                        quit()
-                    elif evento.type == pygame.KEYDOWN:
-                        esperando_saida = False
+                if pontos >= 51:
+                    escreverDados(nome, pontos)
+                    pygame.mixer.stop()
+                    tela.blit(fundoJogo, (0, 0))
+                    texto_vitoria = fonteMorte.render(f"Missão cumprida, piloto! Pontuação final: {pontos}", True, branco)
+                    tela.blit(texto_vitoria, (180, 200))
+                    texto_instrucao = fonteMenu.render("Foi por pouco... mas você conseguiu sobreviver à missão!", True, branco)
+                    tela.blit(texto_instrucao, (100, 300))
+                    pygame.display.update()
 
-            return
+                    tempo_inicio = pygame.time.get_ticks()
+                    esperando_saida = True
+
+                    while esperando_saida:
+                        for evento in pygame.event.get():
+                            if evento.type == pygame.QUIT:
+                                quit()
+                            elif evento.type == pygame.KEYDOWN:
+                                if evento.key == pygame.K_SPACE:
+                                   esperando_saida = False
+
+                        tempo_atual = pygame.time.get_ticks()
+                        if tempo_atual - tempo_inicio >= 7000: 
+                            esperando_saida = False
+
+                    return  
 
         texto_pontos = fonteMenu.render(f"Pontos: {pontos}", True, branco)
         tela.blit(texto_pontos, (10, 10))
@@ -322,7 +323,6 @@ def jogar():
             pygame.time.wait(3000)
             return
 
-        # Objetos decorativos
         iron_x += iron_dx
         iron_y += iron_dy
         if iron_x <= 0 or iron_x >= 900:
@@ -333,7 +333,6 @@ def jogar():
             iron_dy += random.uniform(-0.2, 0.2)
         tela.blit(iron_img, (int(iron_x), int(iron_y)))
 
-        # Sol pulsante
         raio_sol += raio_direcao
         if raio_sol >= raio_max or raio_sol <= raio_min:
             raio_direcao *= -1
@@ -354,7 +353,7 @@ def menu():
 
         tela.blit(fundoStart, (0, 0))
         start = fonteMenu.render("Pressione ENTER para Jogar", True, preto)
-        tela.blit(start, (290, 300))
+        tela.blit(start, (150, 200))
         pygame.display.update()
 
         for evento in pygame.event.get():
