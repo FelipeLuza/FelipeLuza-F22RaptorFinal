@@ -38,3 +38,5 @@ O projeto foi desenvolvido e empacotado no macOS (Apple Silicon).
 Para executar em Windows:  
 - Utilize python main.py (com Python 3.11+ e bibliotecas instaladas); ou  
 - Gere um executável .exe com python setup.py build usando cx_Freeze.
+
+Testador do Jogo: Arthur Marcolin - 1137711
