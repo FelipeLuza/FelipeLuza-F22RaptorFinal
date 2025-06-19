@@ -39,6 +39,6 @@ Para executar em Windows:
 - Utilize python main.py (com Python 3.11+ e bibliotecas instaladas); ou  
 - Gere um executável .exe com python setup.py build usando cx_Freeze.
 
-Testador do Jogo: Arthur Marcolin - 1137711
-Julio Cesar de Almeida Prado - 11137708
-Testador do Jogo: Leronardo Felipe Zoldan - 1138725
+- Testador do Jogo: Arthur Marcolin - 1137711
+- Julio Cesar de Almeida Prado - 11137708
+- Testador do Jogo: Leronardo Felipe Zoldan - 1138725
