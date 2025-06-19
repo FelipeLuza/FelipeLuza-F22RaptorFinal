@@ -40,3 +40,4 @@ Para executar em Windows:
 - Gere um executável .exe com python setup.py build usando cx_Freeze.
 
 Testador do Jogo: Arthur Marcolin - 1137711
+Julio Cesar de Almeida Prado - 11137708
