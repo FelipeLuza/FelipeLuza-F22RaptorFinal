@@ -41,3 +41,4 @@ Para executar em Windows:
 
 Testador do Jogo: Arthur Marcolin - 1137711
 Julio Cesar de Almeida Prado - 11137708
+Testador do Jogo: Leronardo Felipe Zoldan - 1138725
